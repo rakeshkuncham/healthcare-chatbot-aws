@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "1.9.0",
-  "serial": 70,
+  "serial": 49,
   "lineage": "e268c211-fceb-8027-2d68-1e8989969e68",
   "outputs": {
     "appointments_table": {
@@ -63,84 +63,6 @@
     },
     {
       "mode": "managed",
-      "type": "aws_apigatewayv2_integration",
-      "name": "lambda_integration",
-      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
-      "instances": [
-        {
-          "schema_version": 0,
-          "attributes": {
-            "api_id": "vpz8bm25dd",
-            "connection_id": "",
-            "connection_type": "INTERNET",
-            "content_handling_strategy": "",
-            "credentials_arn": "",
-            "description": "",
-            "id": "kxjmq3v",
-            "integration_method": "POST",
-            "integration_response_selection_expression": "",
-            "integration_subtype": "",
-            "integration_type": "AWS_PROXY",
-            "integration_uri": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:626685033484:function:healthcare_chatbot_lambda/invocations",
-            "passthrough_behavior": "",
-            "payload_format_version": "2.0",
-            "request_parameters": {},
-            "request_templates": {},
-            "response_parameters": [],
-            "template_selection_expression": "",
-            "timeout_milliseconds": 30000,
-            "tls_config": []
-          },
-          "sensitive_attributes": [],
-          "private": "bnVsbA==",
-          "dependencies": [
-            "aws_apigatewayv2_api.http_api",
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.queries",
-            "aws_iam_role.lambda_role",
-            "aws_lambda_function.chatbot"
-          ]
-        }
-      ]
-    },
-    {
-      "mode": "managed",
-      "type": "aws_apigatewayv2_route",
-      "name": "default_route",
-      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
-      "instances": [
-        {
-          "schema_version": 0,
-          "attributes": {
-            "api_id": "vpz8bm25dd",
-            "api_key_required": false,
-            "authorization_scopes": [],
-            "authorization_type": "NONE",
-            "authorizer_id": "",
-            "id": "2fzwsid",
-            "model_selection_expression": "",
-            "operation_name": "",
-            "request_models": {},
-            "request_parameter": [],
-            "route_key": "POST /chat",
-            "route_response_selection_expression": "",
-            "target": "integrations/kxjmq3v"
-          },
-          "sensitive_attributes": [],
-          "private": "bnVsbA==",
-          "dependencies": [
-            "aws_apigatewayv2_api.http_api",
-            "aws_apigatewayv2_integration.lambda_integration",
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.queries",
-            "aws_iam_role.lambda_role",
-            "aws_lambda_function.chatbot"
-          ]
-        }
-      ]
-    },
-    {
-      "mode": "managed",
       "type": "aws_apigatewayv2_stage",
       "name": "default",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
@@ -162,7 +84,7 @@
                 "throttling_rate_limit": 0
               }
             ],
-            "deployment_id": "rxo3gg",
+            "deployment_id": "",
             "description": "",
             "execution_arn": "arn:aws:execute-api:us-east-1:626685033484:vpz8bm25dd/$default",
             "id": "$default",
@@ -291,14 +213,8 @@
             "stream_label": "",
             "stream_view_type": "",
             "table_class": "STANDARD",
-            "tags": {
-              "Env": "dev",
-              "Project": "HealthcareChatbot"
-            },
-            "tags_all": {
-              "Env": "dev",
-              "Project": "HealthcareChatbot"
-            },
+            "tags": {},
+            "tags_all": {},
             "timeouts": null,
             "ttl": [
               {
@@ -381,37 +297,6 @@
     },
     {
       "mode": "managed",
-      "type": "aws_iam_policy",
-      "name": "lambda_dynamodb_policy",
-      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
-      "instances": [
-        {
-          "schema_version": 0,
-          "attributes": {
-            "arn": "arn:aws:iam::626685033484:policy/lambda-dynamodb-policy",
-            "attachment_count": 1,
-            "description": "Allow Lambda to access DynamoDB tables",
-            "id": "arn:aws:iam::626685033484:policy/lambda-dynamodb-policy",
-            "name": "lambda-dynamodb-policy",
-            "name_prefix": "",
-            "path": "/",
-            "policy": "{\"Statement\":[{\"Action\":[\"dynamodb:PutItem\",\"dynamodb:GetItem\",\"dynamodb:UpdateItem\",\"dynamodb:Scan\",\"dynamodb:Query\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:dynamodb:us-east-1:626685033484:table/patient_chatbot_table\",\"arn:aws:dynamodb:us-east-1:626685033484:table/ChatQueries\",\"arn:aws:dynamodb:us-east-1:626685033484:table/Appointments\"]}],\"Version\":\"2012-10-17\"}",
-            "policy_id": "ANPAZD2KWXQGO3Y43AFAR",
-            "tags": {},
-            "tags_all": {}
-          },
-          "sensitive_attributes": [],
-          "private": "bnVsbA==",
-          "dependencies": [
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.chat_table",
-            "aws_dynamodb_table.queries"
-          ]
-        }
-      ]
-    },
-    {
-      "mode": "managed",
       "type": "aws_iam_policy_attachment",
       "name": "lambda_basic_policy",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
@@ -438,36 +323,6 @@
     },
     {
       "mode": "managed",
-      "type": "aws_iam_policy_attachment",
-      "name": "lambda_dynamodb_attach",
-      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
-      "instances": [
-        {
-          "schema_version": 0,
-          "attributes": {
-            "groups": [],
-            "id": "lambda-dynamodb-attachment",
-            "name": "lambda-dynamodb-attachment",
-            "policy_arn": "arn:aws:iam::626685033484:policy/lambda-dynamodb-policy",
-            "roles": [
-              "healthcare_lambda_role"
-            ],
-            "users": []
-          },
-          "sensitive_attributes": [],
-          "private": "bnVsbA==",
-          "dependencies": [
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.chat_table",
-            "aws_dynamodb_table.queries",
-            "aws_iam_policy.lambda_dynamodb_policy",
-            "aws_iam_role.lambda_role"
-          ]
-        }
-      ]
-    },
-    {
-      "mode": "managed",
       "type": "aws_iam_role",
       "name": "lambda_role",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
@@ -483,7 +338,6 @@
             "id": "healthcare_lambda_role",
             "inline_policy": [],
             "managed_policy_arns": [
-              "arn:aws:iam::626685033484:policy/lambda-dynamodb-policy",
               "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
             ],
             "max_session_duration": 3600,
@@ -503,7 +357,7 @@
     {
       "mode": "managed",
       "type": "aws_lambda_function",
-      "name": "chatbot",
+      "name": "chatbot_lambda",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
       "instances": [
         {
@@ -513,26 +367,18 @@
               "x86_64"
             ],
             "arn": "arn:aws:lambda:us-east-1:626685033484:function:healthcare_chatbot_lambda",
-            "code_sha256": "aRcKeIB4jT0RBcJerdfBa5JCF9OSef7FHVPFSOJMx+c=",
+            "code_sha256": "tmEFGPCKXvBUB3TobWjr4fHq0W5c1WVhTUQwf8Nrg48=",
             "code_signing_config_arn": "",
             "dead_letter_config": [],
             "description": "",
-            "environment": [
-              {
-                "variables": {
-                  "APPOINTMENTS_TABLE": "Appointments",
-                  "QUERIES_TABLE": "ChatQueries",
-                  "REGION": "ap-south-1"
-                }
-              }
-            ],
+            "environment": [],
             "ephemeral_storage": [
               {
                 "size": 512
               }
             ],
             "file_system_config": [],
-            "filename": "./../lambda/lambda_package.zip",
+            "filename": "lambda.zip",
             "function_name": "healthcare_chatbot_lambda",
             "handler": "lambda_function.lambda_handler",
             "id": "healthcare_chatbot_lambda",
@@ -540,8 +386,8 @@
             "image_uri": "",
             "invoke_arn": "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:626685033484:function:healthcare_chatbot_lambda/invocations",
             "kms_key_arn": "",
-            "last_modified": "2025-11-04T10:30:06.333+0000",
-            "layers": [],
+            "last_modified": "2025-11-04T09:24:45.908+0000",
+            "layers": null,
             "logging_config": [
               {
                 "application_log_level": "",
@@ -550,7 +396,7 @@
                 "system_log_level": ""
               }
             ],
-            "memory_size": 256,
+            "memory_size": 128,
             "package_type": "Zip",
             "publish": false,
             "qualified_arn": "arn:aws:lambda:us-east-1:626685033484:function:healthcare_chatbot_lambda:$LATEST",
@@ -567,17 +413,11 @@
             "signing_profile_version_arn": "",
             "skip_destroy": false,
             "snap_start": [],
-            "source_code_hash": "aRcKeIB4jT0RBcJerdfBa5JCF9OSef7FHVPFSOJMx+c=",
-            "source_code_size": 1066,
-            "tags": {
-              "Env": "dev",
-              "Project": "HealthcareChatbot"
-            },
-            "tags_all": {
-              "Env": "dev",
-              "Project": "HealthcareChatbot"
-            },
-            "timeout": 15,
+            "source_code_hash": "",
+            "source_code_size": 3083,
+            "tags": null,
+            "tags_all": {},
+            "timeout": 3,
             "timeouts": null,
             "tracing_config": [
               {
@@ -590,8 +430,6 @@
           "sensitive_attributes": [],
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjYwMDAwMDAwMDAwMH19",
           "dependencies": [
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.queries",
             "aws_iam_role.lambda_role"
           ]
         }
@@ -600,7 +438,7 @@
     {
       "mode": "managed",
       "type": "aws_lambda_permission",
-      "name": "apigw_invoke",
+      "name": "api_invoke",
       "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
       "instances": [
         {
@@ -622,10 +460,8 @@
           "sensitive_attributes": [],
           "private": "bnVsbA==",
           "dependencies": [
-            "aws_dynamodb_table.appointments",
-            "aws_dynamodb_table.queries",
             "aws_iam_role.lambda_role",
-            "aws_lambda_function.chatbot"
+            "aws_lambda_function.chatbot_lambda"
           ]
         }
       ]
@@ -664,7 +500,7 @@
             "logging": [],
             "object_lock_configuration": [],
             "object_lock_enabled": false,
-            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"arn:aws:s3:::healthcare-chatbot-frontend-b9316fdb/*\"}],\"Version\":\"2012-10-17\"}",
+            "policy": "",
             "region": "us-east-1",
             "replication_configuration": [],
             "request_payer": "BucketOwner",
@@ -683,7 +519,7 @@
                 ]
               }
             ],
-            "tags": {},
+            "tags": null,
             "tags_all": {},
             "timeouts": null,
             "versioning": [
@@ -692,16 +528,9 @@
                 "mfa_delete": false
               }
             ],
-            "website": [
-              {
-                "error_document": "index.html",
-                "index_document": "index.html",
-                "redirect_all_requests_to": "",
-                "routing_rules": ""
-              }
-            ],
-            "website_domain": "s3-website-us-east-1.amazonaws.com",
-            "website_endpoint": "healthcare-chatbot-frontend-b9316fdb.s3-website-us-east-1.amazonaws.com"
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
           },
           "sensitive_attributes": [],
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
